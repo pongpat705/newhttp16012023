@@ -42,4 +42,11 @@ public class EmployeeRestController {
     ){
         return this.employeeService.insertAndUpdateEmployee(employeeModel);
     }
+
+    @DeleteMapping("/employee")
+    public ResponseModel<Void> deleteEmployee(
+            @RequestBody EmployeeModel employeeModel
+    ){
+        return this.employeeService.deleteEmployee(employeeModel);
+    }
 }

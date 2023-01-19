@@ -60,6 +60,23 @@ public class EmployeeService {
         return result;
     }
 
+    public ResponseModel<Void> deleteEmployee(EmployeeModel employeeModel){
+        ResponseModel<Void> result = new ResponseModel<>();
+
+        result.setStatus(201);
+        result.setDescription("ok");
+        try {
+            // do some business
+            EmployeesEntity employeesEntity = new EmployeesEntity();
+            this.employeeTransformComponent.transfromModelToEntityForUpdate(employeesEntity, employeeModel);
+            this.employeesRepository.delete(employeesEntity);
+        } catch (Exception e){
+            result.setStatus(500);
+            result.setDescription(e.getMessage());
+        }
+        return result;
+    }
+
     public ResponseModel<Void> updateEmployee(EmployeeModel employeeModel){
         ResponseModel<Void> result = new ResponseModel<>();
 
