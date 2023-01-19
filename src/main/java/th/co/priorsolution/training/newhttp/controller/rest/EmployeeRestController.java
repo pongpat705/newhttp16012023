@@ -5,6 +5,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.web.bind.annotation.*;
+import th.co.priorsolution.training.newhttp.model.EmployeeCriteriaModel;
 import th.co.priorsolution.training.newhttp.model.EmployeeModel;
 import th.co.priorsolution.training.newhttp.model.ResponseModel;
 import th.co.priorsolution.training.newhttp.service.EmployeeService;
@@ -25,7 +26,7 @@ public class EmployeeRestController {
 
     @PostMapping("/find/employee")
     public ResponseModel<List<EmployeeModel>> getEmployeeByLastName(
-            @RequestBody EmployeeModel employeeModel
+            @RequestBody EmployeeCriteriaModel employeeModel
     ){
         return this.employeeService.getEmployeeByEmployee(employeeModel);
     }

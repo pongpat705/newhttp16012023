@@ -3,6 +3,7 @@ package th.co.priorsolution.training.newhttp.service;
 import org.springframework.stereotype.Service;
 import th.co.priorsolution.training.newhttp.component.EmployeeTransformComponent;
 import th.co.priorsolution.training.newhttp.entity.jpa.EmployeesEntity;
+import th.co.priorsolution.training.newhttp.model.EmployeeCriteriaModel;
 import th.co.priorsolution.training.newhttp.model.EmployeeModel;
 import th.co.priorsolution.training.newhttp.model.ResponseModel;
 import th.co.priorsolution.training.newhttp.repositroy.EmployeeNativeRepository;
@@ -27,7 +28,7 @@ public class EmployeeService {
     private EmployeeTransformComponent employeeTransformComponent;
 
 
-    public ResponseModel<List<EmployeeModel>> getEmployeeByEmployee(EmployeeModel employeeModel){
+    public ResponseModel<List<EmployeeModel>> getEmployeeByEmployee(EmployeeCriteriaModel employeeModel){
         ResponseModel<List<EmployeeModel>> result = new ResponseModel<>();
 
         result.setStatus(200);

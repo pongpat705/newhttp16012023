@@ -4,6 +4,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
+import th.co.priorsolution.training.newhttp.model.EmployeeCriteriaModel;
 import th.co.priorsolution.training.newhttp.model.EmployeeModel;
 import th.co.priorsolution.training.newhttp.repositroy.EmployeeNativeRepository;
 
@@ -24,7 +25,7 @@ public class EmployeeNativeRepositoryImpl implements EmployeeNativeRepository {
 
 
     @Override
-    public List<EmployeeModel> findEmployeeByEmployee(EmployeeModel employeeModel) {
+    public List<EmployeeModel> findEmployeeByEmployee(EmployeeCriteriaModel employeeModel) {
 
         List<Object> paramList = new ArrayList<>();
 
@@ -42,6 +43,15 @@ public class EmployeeNativeRepositoryImpl implements EmployeeNativeRepository {
         if(StringUtils.isNotEmpty(employeeModel.getGender())){
             sql +=" and gender = ?  ";
             paramList.add(employeeModel.getGender());
+        }
+        if(null != employeeModel.getBirthDate1() && null == employeeModel.getBirthDate2()){
+            sql +=" and birth_date = ?  ";
+            paramList.add(employeeModel.getBirthDate1());
+        }
+        if(null != employeeModel.getBirthDate1() && null != employeeModel.getBirthDate2()){
+            sql +=" and birth_date between ? and ? ";
+            paramList.add(employeeModel.getBirthDate1());
+            paramList.add(employeeModel.getBirthDate2());
         }
 
         List<EmployeeModel> result = this.jdbcTemplate.query(sql, new RowMapper<EmployeeModel>() {
