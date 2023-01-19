@@ -23,6 +23,14 @@ public class EmployeeRestController {
 
 
 
+    @PostMapping("/find/employee")
+    public ResponseModel<List<EmployeeModel>> getEmployeeByLastName(
+            @RequestBody EmployeeModel employeeModel
+    ){
+        return this.employeeService.getEmployeeByEmployee(employeeModel);
+    }
+
+
 
     @GetMapping("/employee")
     public ResponseModel<List<EmployeeModel>> getEmployeeByLastName(

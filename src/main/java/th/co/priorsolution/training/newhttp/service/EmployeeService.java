@@ -5,6 +5,7 @@ import th.co.priorsolution.training.newhttp.component.EmployeeTransformComponent
 import th.co.priorsolution.training.newhttp.entity.jpa.EmployeesEntity;
 import th.co.priorsolution.training.newhttp.model.EmployeeModel;
 import th.co.priorsolution.training.newhttp.model.ResponseModel;
+import th.co.priorsolution.training.newhttp.repositroy.EmployeeNativeRepository;
 import th.co.priorsolution.training.newhttp.repositroy.EmployeesRepository;
 
 import java.util.List;
@@ -14,13 +15,33 @@ import java.util.Optional;
 public class EmployeeService {
 
     public EmployeeService(EmployeesRepository employeesRepository
+            , EmployeeNativeRepository employeeNativeRepository
             , EmployeeTransformComponent employeeTransformComponent) {
         this.employeesRepository = employeesRepository;
+        this.employeeNativeRepository = employeeNativeRepository;
         this.employeeTransformComponent = employeeTransformComponent;
     }
 
     private EmployeesRepository employeesRepository;
+    private EmployeeNativeRepository employeeNativeRepository;
     private EmployeeTransformComponent employeeTransformComponent;
+
+
+    public ResponseModel<List<EmployeeModel>> getEmployeeByEmployee(EmployeeModel employeeModel){
+        ResponseModel<List<EmployeeModel>> result = new ResponseModel<>();
+
+        result.setStatus(200);
+        result.setDescription("ok");
+        try {
+            // do some business
+            List<EmployeeModel> transformedData = this.employeeNativeRepository.findEmployeeByEmployee(employeeModel);
+            result.setData(transformedData);
+        } catch (Exception e){
+            result.setStatus(500);
+            result.setDescription(e.getMessage());
+        }
+        return result;
+    }
 
     public ResponseModel<List<EmployeeModel>> getEmployeeByLastnameThenResponse(String lastname){
         ResponseModel<List<EmployeeModel>> result = new ResponseModel<>();
