@@ -9,4 +9,8 @@ public interface EmployeeNativeRepository {
 
     public List<EmployeeModel> findEmployeeByEmployee(EmployeeCriteriaModel employeeModel);
 
+    public int insertEmployee(List<EmployeeModel> employeeModels);
+
+    public int updateEmployee(EmployeeModel employeeModel);
+
 }

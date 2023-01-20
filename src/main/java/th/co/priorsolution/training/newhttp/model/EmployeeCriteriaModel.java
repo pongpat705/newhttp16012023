@@ -7,7 +7,7 @@ import java.time.LocalDate;
 
 @Data
 public class EmployeeCriteriaModel {
-    private int empNo;
+    private Integer empNo;
     @JsonFormat(pattern="yyyy-MM-dd")
     private LocalDate birthDate1;
     @JsonFormat(pattern="yyyy-MM-dd")

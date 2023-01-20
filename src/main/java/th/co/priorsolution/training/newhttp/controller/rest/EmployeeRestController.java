@@ -31,7 +31,12 @@ public class EmployeeRestController {
         return this.employeeService.getEmployeeByEmployee(employeeModel);
     }
 
-
+    @PostMapping("/insert/employee")
+    public ResponseModel<Integer> getEmployeeByLastName(
+            @RequestBody List<EmployeeModel> employeeModel
+    ){
+        return this.employeeService.insertEmployeeByNativeSql(employeeModel);
+    }
 
     @GetMapping("/employee")
     public ResponseModel<List<EmployeeModel>> getEmployeeByLastName(

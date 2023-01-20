@@ -66,6 +66,22 @@ public class EmployeeService {
     }
 
 
+    public ResponseModel<Integer> insertEmployeeByNativeSql(List<EmployeeModel> employeeModels){
+        ResponseModel<Integer> result = new ResponseModel<>();
+
+        result.setStatus(201);
+        result.setDescription("ok");
+        try {
+            // do some business
+            int insertedRows = this.employeeNativeRepository.insertEmployee(employeeModels);
+            result.setData(insertedRows);
+        } catch (Exception e){
+            result.setStatus(500);
+            result.setDescription(e.getMessage());
+        }
+        return result;
+    }
+
     public ResponseModel<Void> insertAndUpdateEmployee(EmployeeModel employeeModel){
         ResponseModel<Void> result = new ResponseModel<>();
 
