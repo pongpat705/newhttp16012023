@@ -7,7 +7,7 @@ import java.time.LocalDate;
 
 @Data
 public class EmployeeModel {
-    private int empNo;
+    private Integer empNo;
     @JsonFormat(pattern="yyyy-MM-dd")
     private LocalDate birthDate;
     private String firstName;

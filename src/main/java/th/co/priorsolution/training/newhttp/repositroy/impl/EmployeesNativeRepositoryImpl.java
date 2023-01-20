@@ -119,11 +119,14 @@ public class EmployeesNativeRepositoryImpl implements EmployeesNativeRepository 
             stringJoiner.add(" hire_date = ? ") ;
             paramList.add(employeeModel.getHireDate());
         }
-        int insertedRow = 0;
-        if(paramList.size()>0){
+
+        int updatedRow = 0;
+        if(paramList.size()>0 && null != employeeModel.getEmpNo()){
             sql+= stringJoiner.toString();
-            insertedRow = this.jdbcTemplate.update(sql, paramList.toArray());
+            sql+= " where emp_no = ? ";
+            paramList.add(employeeModel.getEmpNo());
+            updatedRow = this.jdbcTemplate.update(sql, paramList.toArray());
         }
-        return insertedRow;
+        return updatedRow;
     }
 }
