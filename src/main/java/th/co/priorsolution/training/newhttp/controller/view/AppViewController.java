@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import th.co.priorsolution.training.newhttp.model.PersonModel;
 
 @Controller
-@RequestMapping("/app")
 public class AppViewController {
 
     @GetMapping("/")
@@ -17,6 +16,11 @@ public class AppViewController {
         personModel.setNickName("Mao");
 
         model.addAttribute("person", personModel);
+        return "index";
+    }
+
+    @GetMapping("/search")
+    public String searchView(Model model){
         return "index";
     }
 }

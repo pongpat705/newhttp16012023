@@ -6,7 +6,7 @@ import th.co.priorsolution.training.newhttp.entity.jpa.EmployeesEntity;
 import th.co.priorsolution.training.newhttp.model.EmployeeCriteriaModel;
 import th.co.priorsolution.training.newhttp.model.EmployeeModel;
 import th.co.priorsolution.training.newhttp.model.ResponseModel;
-import th.co.priorsolution.training.newhttp.repositroy.EmployeeNativeRepository;
+import th.co.priorsolution.training.newhttp.repositroy.EmployeesNativeRepository;
 import th.co.priorsolution.training.newhttp.repositroy.EmployeesRepository;
 
 import java.util.List;
@@ -16,7 +16,7 @@ import java.util.Optional;
 public class EmployeeService {
 
     public EmployeeService(EmployeesRepository employeesRepository
-            , EmployeeNativeRepository employeeNativeRepository
+            , EmployeesNativeRepository employeeNativeRepository
             , EmployeeTransformComponent employeeTransformComponent) {
         this.employeesRepository = employeesRepository;
         this.employeeNativeRepository = employeeNativeRepository;
@@ -24,7 +24,7 @@ public class EmployeeService {
     }
 
     private EmployeesRepository employeesRepository;
-    private EmployeeNativeRepository employeeNativeRepository;
+    private EmployeesNativeRepository employeeNativeRepository;
     private EmployeeTransformComponent employeeTransformComponent;
 
 

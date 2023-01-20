@@ -1,29 +1,24 @@
 package th.co.priorsolution.training.newhttp.repositroy.impl;
 
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.PreparedStatementCallback;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import th.co.priorsolution.training.newhttp.model.EmployeeCriteriaModel;
 import th.co.priorsolution.training.newhttp.model.EmployeeModel;
-import th.co.priorsolution.training.newhttp.repositroy.EmployeeNativeRepository;
+import th.co.priorsolution.training.newhttp.repositroy.EmployeesNativeRepository;
 
-import java.sql.Date;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.StringJoiner;
 
 @Repository
-public class EmployeeNativeRepositoryImpl implements EmployeeNativeRepository {
+public class EmployeesNativeRepositoryImpl implements EmployeesNativeRepository {
     private JdbcTemplate jdbcTemplate;
 
-    public EmployeeNativeRepositoryImpl(JdbcTemplate jdbcTemplate) {
+    public EmployeesNativeRepositoryImpl(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 

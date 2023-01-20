@@ -5,7 +5,7 @@ import th.co.priorsolution.training.newhttp.model.EmployeeModel;
 
 import java.util.List;
 
-public interface EmployeeNativeRepository {
+public interface EmployeesNativeRepository {
 
     public List<EmployeeModel> findEmployeeByEmployee(EmployeeCriteriaModel employeeModel);
 
