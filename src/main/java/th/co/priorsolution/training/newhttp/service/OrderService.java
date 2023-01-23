@@ -39,7 +39,7 @@ public class OrderService {
         return result;
     }
 
-    @Transactional(rollbackFor = SQLException.class, propagation = Propagation.)
+    @Transactional(rollbackFor = SQLException.class, propagation = Propagation.REQUIRES_NEW)
     public void insertTableBill(TableBillEntity tableBillEntity){
 
         int tableBillId = this.tableBillNativeRepository.insertTableBill(tableBillEntity);
