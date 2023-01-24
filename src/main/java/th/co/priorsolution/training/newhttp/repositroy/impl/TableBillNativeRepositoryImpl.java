@@ -4,12 +4,15 @@ import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.stereotype.Repository;
 import th.co.priorsolution.training.newhttp.entity.pure.TableBillEntity;
 import th.co.priorsolution.training.newhttp.repositroy.TableBillNativeRepository;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -40,17 +43,19 @@ public class TableBillNativeRepositoryImpl implements TableBillNativeRepository 
 
         GeneratedKeyHolder generatedKeyHolder = new GeneratedKeyHolder();
 
-
-        int insertedRow = this.jdbcTemplate.update(con -> {
-            PreparedStatement preparedStatement = con.prepareStatement(sb.toString(), Statement.RETURN_GENERATED_KEYS);
-            for (int i = 0; i < paramList.size(); i++) {
-                int sqlI = i+1;
-                preparedStatement.setObject(sqlI, paramList.get(i));
-            }
-            return preparedStatement;
-        }, generatedKeyHolder);
+        int insertedRow = this.jdbcTemplate.update(
+                con -> this.prepareForInsertTableBill(sb.toString(), con, paramList)
+                , generatedKeyHolder);
         log.info("insertTableBill affect {} row", insertedRow);
 
         return generatedKeyHolder.getKey().intValue();
+    }
+    private PreparedStatement prepareForInsertTableBill(String sql, Connection connection, List<Object> paramList) throws SQLException {
+        PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        for (int i = 0; i < paramList.size(); i++) {
+            int sqlI = i+1;
+            preparedStatement.setObject(sqlI, paramList.get(i));
+        }
+        return preparedStatement;
     }
 }
