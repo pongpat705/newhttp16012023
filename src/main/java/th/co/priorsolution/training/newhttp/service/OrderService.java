@@ -9,6 +9,9 @@ import th.co.priorsolution.training.newhttp.entity.pure.TableBillEntity;
 import th.co.priorsolution.training.newhttp.model.ResponseModel;
 import th.co.priorsolution.training.newhttp.repositroy.TableBillNativeRepository;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 
@@ -22,8 +25,8 @@ public class OrderService {
         this.tableBillNativeRepository = tableBillNativeRepository;
     }
 
-    public ResponseModel<Integer>  insertNewBill(TableBillEntity tableBillEntity){
-        ResponseModel<Integer> result = new ResponseModel<>();
+    public ResponseModel<Void>  insertNewBill(TableBillEntity tableBillEntity){
+        ResponseModel<Void> result = new ResponseModel<>();
 
         result.setStatus(201);
         result.setDescription("ok");
@@ -33,6 +36,7 @@ public class OrderService {
 //            insert billOrder
 //
         } catch (Exception e){
+            e.printStackTrace();
             result.setStatus(500);
             result.setDescription(e.getMessage());
         }
@@ -40,7 +44,7 @@ public class OrderService {
     }
 
     @Transactional(rollbackFor = SQLException.class, propagation = Propagation.REQUIRES_NEW)
-    public void insertTableBill(TableBillEntity tableBillEntity){
+    public void insertTableBill(TableBillEntity tableBillEntity) throws IOException {
 
         int tableBillId = this.tableBillNativeRepository.insertTableBill(tableBillEntity);
 
@@ -49,8 +53,9 @@ public class OrderService {
         billOrderEntity.setBillId(tableBillId);
         billOrderEntity.setStatus("NEW");
         billOrderEntity.setOrderDate(LocalDateTime.now());
-        int billOrderId = this.orderBillNativeRepository.insertBillOrder(billOrderEntity);
+//        int billOrderId = this.orderBillNativeRepository.insertBillOrder(billOrderEntity);
 
-        //            insert menu
+
+
     }
 }

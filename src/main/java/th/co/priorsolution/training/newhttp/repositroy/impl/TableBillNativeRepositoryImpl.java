@@ -10,6 +10,7 @@ import th.co.priorsolution.training.newhttp.entity.pure.TableBillEntity;
 import th.co.priorsolution.training.newhttp.repositroy.TableBillNativeRepository;
 
 import java.sql.PreparedStatement;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,9 +42,10 @@ public class TableBillNativeRepositoryImpl implements TableBillNativeRepository 
 
 
         int insertedRow = this.jdbcTemplate.update(con -> {
-            PreparedStatement preparedStatement = con.prepareStatement(sb.toString());
+            PreparedStatement preparedStatement = con.prepareStatement(sb.toString(), Statement.RETURN_GENERATED_KEYS);
             for (int i = 0; i < paramList.size(); i++) {
-                preparedStatement.setObject(i, paramList.get(i));
+                int sqlI = i+1;
+                preparedStatement.setObject(sqlI, paramList.get(i));
             }
             return preparedStatement;
         }, generatedKeyHolder);
